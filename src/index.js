@@ -1,12 +1,23 @@
+import { createBrowserHistory } from 'history';
+// import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import store from './app/store';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
+
+export const history = createBrowserHistory();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <Provider>
+    </Provider> */}
+      <BrowserRouter history={history}>
+        <App />
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
