@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import InputField from '../../../../components/form-controls/InputField';
 import PasswordField from '../../../../components/form-controls/PasswordField';
 
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
   onSubmit: PropTypes.func,
 };
 
@@ -39,32 +39,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RegisterForm(props) {
+function LoginForm(props) {
   const classes = useStyles();
 
   const schema = yup.object().shape({
-    name: yup
-      .string()
-      .required('Vui lòng nhập họ và tên.')
-      .test('Cần ít nhất 2 từ.', 'Vui lòng nhập ít nhất 2 từ.', (value) => {
-        // console.log(value);
-        return value.split(' ').length >= 2;
-      }),
-
     email: yup.string().required('Vui lòng nhập email.').email('Vui lòng nhập đúng email.'),
     password: yup.string().required('Vui lòng nhập mật khẩu.').min(6, 'Vui lòng nhập ít nhất 6 ký tự.'),
-    retypePassword: yup
-      .string()
-      .required('Vui lòng nhập lại mật khẩu.')
-      .oneOf([yup.ref('password')], 'Mật khẩu không đúng.'),
   });
 
   const form = useForm({
     defaultValues: {
-      name: '',
       email: '',
       password: '',
-      retypePassword: '',
     },
     resolver: yupResolver(schema),
   });
@@ -87,13 +73,11 @@ function RegisterForm(props) {
       </Avatar>
 
       <Typography className={classes.title} component="h3" variant="h5">
-        Đăng ký tài khoản
+        Đăng nhập
       </Typography>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <InputField name="name" label="Họ và tên" form={form} />
         <InputField name="email" label="Email" form={form} />
         <PasswordField name="password" label="Mật khẩu" form={form} />
-        <PasswordField name="retypePassword" label="Nhập lại mật khẩu" form={form} />
 
         <Button
           className={classes.submit}
@@ -104,11 +88,11 @@ function RegisterForm(props) {
           disabled={isSubmitting}
           size="large"
         >
-          Tạo tào khoản
+          Đăng nhập
         </Button>
       </form>
     </div>
   );
 }
 
-export default RegisterForm;
+export default LoginForm;

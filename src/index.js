@@ -1,5 +1,5 @@
 import { createBrowserHistory } from 'history';
-// import { SnackbarProvider } from 'notistack';
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -13,11 +13,13 @@ export const history = createBrowserHistory();
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Provider>
-    </Provider> */}
+    <Provider store={store}>
       <BrowserRouter history={history}>
-        <App />
+        <SnackbarProvider anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+          <App />
+        </SnackbarProvider>
       </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

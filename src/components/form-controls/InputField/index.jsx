@@ -12,18 +12,18 @@ InputField.propTypes = {
 };
 
 function InputField(props) {
-    const { form, name, lable, disabled } = props;
+    const { form, name, label, disabled } = props;
     const { errors } = form.formState;
     const hasError = errors[name];
     return (
         <Controller
-            name={name}
             control={form.control}
-            render={({ field: { onchange, onblur }, fieldState: {} }) => {
-                <TextField 
+            name={name}
+            render={({ field: { onChange, onBlur }, fieldState: {} }) => (
+                <TextField
                     margin="normal"
                     variant="outlined"
-                    fullWith
+                    fullWidth
                     label={label}
                     disabled={disabled}
                     error={!!hasError}
@@ -31,8 +31,8 @@ function InputField(props) {
                     onChange={onChange}
                     onBlur={onBlur}
                 />
-            }}
-        />  
+            )}
+        />
     );
 }
 
